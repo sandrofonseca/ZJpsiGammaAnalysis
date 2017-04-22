@@ -309,7 +309,7 @@ bool AcceptanceStudies::PATGenFilter(edm::Handle <pat::PackedGenParticleCollecti
         //mumuMass_->Fill(Mll);
 
 		if(verbose_) std::cout<< "Dimuons Invariant Mass Mll, pT, eta, phi: " << Mll << " " << MllpT << " " << Mlleta << " " << Mllphi << std::endl;
-		if (leadingMuon.pt() >= muonLeadPt_ || trailingMuon.pt() >= muonTrailPt_ ) {
+		if (leadingMuon.pt() >= muonLeadPt_ && trailingMuon.pt() >= muonTrailPt_ ) {
         /*    leadingMuonPtMinSel_->Fill(leadingMuon.pt());
             leadingMuonEtaMinSel_->Fill(leadingMuon.eta());
             leadingMuonPhiMinSel_->Fill(leadingMuon.phi());
@@ -323,7 +323,8 @@ bool AcceptanceStudies::PATGenFilter(edm::Handle <pat::PackedGenParticleCollecti
 			//   // jpsi peak
 			//     // ***
 			//
-			if (Mll > minJPsiMass_ && Mll < maxJPsiMass_){
+			// if (Mll > minJPsiMass_ && Mll < maxJPsiMass_){
+			if (true) {
 				nJpsi++;                           
 				if(verbose_) std::cout<<" Invariant Mass in JPsi peak, pT, eta, phi " << Mll << " " << MllpT << " " << Mlleta << " " << Mllphi << std::endl;
           //         Jpsi_Mass_->Fill(Mll);
@@ -338,7 +339,7 @@ bool AcceptanceStudies::PATGenFilter(edm::Handle <pat::PackedGenParticleCollecti
 			const pat::PackedGenParticle& mcPhoton = (*genPhoton);
 			if ( not (mcPhoton.pdgId() == 22) ) continue; // make sure it is a photon
 			//if(verbose_) cout<<" mcPhoton.pdgId()" << mcPhoton.pdgId() << "mcPhoton.pt() "  << mcPhoton.pt() << " mcPhoton.isPromptFinalState() " <<  mcPhoton.status() << endl;
-			if(mcPhoton.pt() > GammaMinPtCut_ && mcPhoton.status() == 1 ) {	
+			if(mcPhoton.pt() > GammaMinPtCut_ && mcPhoton.status() == 1 && fabs(mcPhoton.eta()) <= 2.5 ) {	
 			if(verbose_) cout<<" mcPhoton.pdgId() " << mcPhoton.pdgId() << " mcPhoton.pt() "  << mcPhoton.pt() << " mcPhoton.State() " <<  mcPhoton.status() << endl;
 
 			myPhotons.push_back(*genPhoton);
@@ -371,7 +372,8 @@ bool AcceptanceStudies::PATGenFilter(edm::Handle <pat::PackedGenParticleCollecti
             double Mllgphi = (leadingMuon.p4() + trailingMuon.p4() + Gamma.p4()).phi();
   //          mumugammaMass_->Fill(Mllg);
 
-			if (drLeadMuPhoton > drLeadMuPhotonSel_ && drTrailPhoton > drTrailPhotonSel_){
+			// if (drLeadMuPhoton > drLeadMuPhotonSel_ && drTrailPhoton > drTrailPhotonSel_){
+			if (true){
 
 				//double Mllg = (leadingMuon.p4() + trailingMuon.p4() + Gamma.p4()).mass();
 				//double MllgpT = (leadingMuon.p4() + trailingMuon.p4() + Gamma.p4()).pt();
