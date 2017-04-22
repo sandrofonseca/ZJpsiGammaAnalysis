@@ -309,7 +309,7 @@ bool AcceptanceStudies::PATGenFilter(edm::Handle <pat::PackedGenParticleCollecti
         //mumuMass_->Fill(Mll);
 
 		if(verbose_) std::cout<< "Dimuons Invariant Mass Mll, pT, eta, phi: " << Mll << " " << MllpT << " " << Mlleta << " " << Mllphi << std::endl;
-		if (leadingMuon.pt() >= muonLeadPt_ && trailingMuon.pt() >= muonTrailPt_ ) {
+		if (leadingMuon.pt() >= muonLeadPt_ && trailingMuon.pt() >= muonTrailPt_ && fabs(leadingMuon.eta()) <= 2.4 && fabs(trailingMuon.eta()) 2.4 ) {
         /*    leadingMuonPtMinSel_->Fill(leadingMuon.pt());
             leadingMuonEtaMinSel_->Fill(leadingMuon.eta());
             leadingMuonPhiMinSel_->Fill(leadingMuon.phi());
