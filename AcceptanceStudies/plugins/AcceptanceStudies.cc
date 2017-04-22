@@ -404,7 +404,7 @@ AcceptanceStudies::endJob()
 
  // set evts counters
   TnEvts->SetBinContent(1, nEvts);
-  TnEvtsGEN->SetBinContent(1, nEvtsRECO);
+  TnEvtsGEN->SetBinContent(1, nEvtsGEN);
 
 }
 
