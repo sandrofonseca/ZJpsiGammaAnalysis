@@ -59,95 +59,95 @@ Implementation:
 
 
 class AcceptanceStudies : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
-	public:
-		explicit AcceptanceStudies(const edm::ParameterSet&);
-		~AcceptanceStudies();
+public:
+	explicit AcceptanceStudies(const edm::ParameterSet&);
+	~AcceptanceStudies();
 
 
-	private:
-		virtual void beginJob() override;
-		virtual void analyze(const edm::Event&, const edm::EventSetup&) override;
-		virtual void endJob() override;
-		bool PATGenFilter(edm::Handle <pat::PackedGenParticleCollection> genColl, const edm::Event &iEvent);
+private:
+	virtual void beginJob() override;
+	virtual void analyze(const edm::Event&, const edm::EventSetup&) override;
+	virtual void endJob() override;
+	bool PATGenFilter(edm::Handle <pat::PackedGenParticleCollection> genColl, const edm::Event &iEvent);
 		///      bool PATRecoFilter(edm::Handle<vector<pat::Muon>> muons,edm::Handle<edm::View<pat::Photon> > photonHandle,const edm::Event &iEvent);
 
 
 		// ----------member data ---------------------------
 
 		//edm::EDGetTokenT<pat::MuonCollection> muonCollToken;
-		edm::EDGetTokenT<pat::PackedGenParticleCollection> genCollToken;
+	edm::EDGetTokenT<pat::PackedGenParticleCollection> genCollToken;
 		//  edm::EDGetTokenT<edm::View<pat::Photon> > photonCollection_;
 
 
 
 
 		//genMuons
-		TH1F* leadingMuonPt_ ;
-		TH1F* leadingMuonEta_ ;
+	TH1F* leadingMuonPt_ ;
+	TH1F* leadingMuonEta_ ;
 		//TH2F* leadingMuonPtVsleadingMuonEta_ ;
-		TH1F* leadingMuonPhi_;
-		TH1F* trailingMuonPt_ ;
-		TH1F* trailingMuonEta_ ;
-		TH1F* trailingMuonPhi_ ;
-		TH1F* mumuMass_;
+	TH1F* leadingMuonPhi_;
+	TH1F* trailingMuonPt_ ;
+	TH1F* trailingMuonEta_ ;
+	TH1F* trailingMuonPhi_ ;
+	TH1F* mumuMass_;
 
 		//MinSel
-		TH1F* leadingMuonPtMinSel_ ;
-		TH1F* leadingMuonEtaMinSel_ ;
-		TH1F* leadingMuonPhiMinSel_ ;
+	TH1F* leadingMuonPtMinSel_ ;
+	TH1F* leadingMuonEtaMinSel_ ;
+	TH1F* leadingMuonPhiMinSel_ ;
 		//  TH2F* leadingMuonPtVsleadingMuonEtaMinSel_ ;
-		TH1F* trailingMuonPtMinSel_  ;
-		TH1F* trailingMuonEtaMinSel_ ;
-		TH1F* trailingMuonPhiMinSel_ ;
-		TH1F* mumuMassMinSel_;
+	TH1F* trailingMuonPtMinSel_  ;
+	TH1F* trailingMuonEtaMinSel_ ;
+	TH1F* trailingMuonPhiMinSel_ ;
+	TH1F* mumuMassMinSel_;
 
 		//genGammas
-		TH1F* gammaPt_ ;
-		TH1F* gammaEta_ ;
-		TH1F* gammaPhi_ ;
-		TH1F* mumugammaMass_;
+	TH1F* gammaPt_ ;
+	TH1F* gammaEta_ ;
+	TH1F* gammaPhi_ ;
+	TH1F* mumugammaMass_;
 
 		//MinSel
-		TH1F* gammaPtMinSel_  ;
-		TH1F* gammaEtaMinSel_ ;
-		TH1F* gammaPhiMinSel_ ;
-		TH1F* mumugammaMassMinSel_; 
-        TH1F* Jpsi_Mass_;
+	TH1F* gammaPtMinSel_  ;
+	TH1F* gammaEtaMinSel_ ;
+	TH1F* gammaPhiMinSel_ ;
+	TH1F* mumugammaMassMinSel_; 
+	TH1F* Jpsi_Mass_;
 
 		// Evts Counters
-		int nEvts;
-		int nEvtsGEN;
-		int nEvtsRECO;
-		TH1D* TnEvts;
-		TH1D* TnEvtsGEN;
+	int nEvts;
+	int nEvtsGEN;
+	int nEvtsRECO;
+	TH1D* TnEvts;
+	TH1D* TnEvtsGEN;
 
   // Histos map
-  std::map<std::string, TH1D*> nEvtsHistosMap;
+	std::map<std::string, TH1D*> nEvtsHistosMap;
 
 		// GEN configs
-		bool verbose_;
-		std::string configName_;
-		double minMuPt_;
-		double maxMuEta_;
-		double muonLeadPt_, muonTrailPt_;
-		double minJPsiMass_ ;
-		double maxJPsiMass_,GammaMinPtCut_,drLeadMuPhotonSel_,drTrailPhotonSel_; 
+	bool verbose_;
+	std::string configName_;
+	double minMuPt_;
+	double maxMuEta_;
+	double muonLeadPt_, muonTrailPt_;
+	double minJPsiMass_ ;
+	double maxJPsiMass_,GammaMinPtCut_,drLeadMuPhotonSel_,drTrailPhotonSel_; 
 
 
 };
 
 AcceptanceStudies::AcceptanceStudies(const edm::ParameterSet& iConfig):
-	verbose_ (iConfig.getParameter< bool > ("verbose")),
-	configName_ (iConfig.getParameter< std::string > ("configName")),
-	minMuPt_ (iConfig.getParameter<double>("minMuPt")),
-	maxMuEta_ (iConfig.getParameter<double>("maxMuEta")), 
-	muonLeadPt_ (iConfig.getParameter<double>("minMuonLeadPt")),
-	muonTrailPt_ (iConfig.getParameter<double>("minMuonTrailPt")),
-	minJPsiMass_ (iConfig.getParameter<double>("minJPsiMass")),
-	maxJPsiMass_ (iConfig.getParameter<double>("maxJPsiMass")),
-	GammaMinPtCut_ (iConfig.getParameter<double>("GammaMinPtCut")),
-	drLeadMuPhotonSel_ (iConfig.getParameter<double>("DeltaRLeadMuPhotonSel")),
-	drTrailPhotonSel_ (iConfig.getParameter<double>("DeltaRTrailPhotonSel"))
+verbose_ (iConfig.getParameter< bool > ("verbose")),
+configName_ (iConfig.getParameter< std::string > ("configName")),
+minMuPt_ (iConfig.getParameter<double>("minMuPt")),
+maxMuEta_ (iConfig.getParameter<double>("maxMuEta")), 
+muonLeadPt_ (iConfig.getParameter<double>("minMuonLeadPt")),
+muonTrailPt_ (iConfig.getParameter<double>("minMuonTrailPt")),
+minJPsiMass_ (iConfig.getParameter<double>("minJPsiMass")),
+maxJPsiMass_ (iConfig.getParameter<double>("maxJPsiMass")),
+GammaMinPtCut_ (iConfig.getParameter<double>("GammaMinPtCut")),
+drLeadMuPhotonSel_ (iConfig.getParameter<double>("DeltaRLeadMuPhotonSel")),
+drTrailPhotonSel_ (iConfig.getParameter<double>("DeltaRTrailPhotonSel"))
 
 
 
@@ -166,8 +166,8 @@ AcceptanceStudies::AcceptanceStudies(const edm::ParameterSet& iConfig):
 	nEvtsRECO = 0;
 
 	// Books evts counters
-	   TnEvts = fs->make<TH1D>( ("h_nEvts_"+configName_).c_str() , ("h_nEvts_"+configName_+";  x; NEvts").c_str(), 1, 0., 1.);
-	   TnEvtsGEN = fs->make<TH1D>( ("h_nEvtsGEN_"+configName_).c_str() , ("h_nEvtsGEN_"+configName_+";  x; nEvtsGEN").c_str(), 1, 0., 1.);
+	TnEvts = fs->make<TH1D>( ("h_nEvts_"+configName_).c_str() , ("h_nEvts_"+configName_+";  x; NEvts").c_str(), 1, 0., 1.);
+	TnEvtsGEN = fs->make<TH1D>( ("h_nEvtsGEN_"+configName_).c_str() , ("h_nEvtsGEN_"+configName_+";  x; nEvtsGEN").c_str(), 1, 0., 1.);
 
 
 	//TFileDirectory fs->= fs->mkfs->"plots");
@@ -191,7 +191,7 @@ AcceptanceStudies::AcceptanceStudies(const edm::ParameterSet& iConfig):
 	TH1F* trailingMuonEtaMinSel_ = fs->make<TH1F>("trailingMuonEtaMinSel" , "mu2_eta" ,   100,  -5.,   5.);
 	TH1F* trailingMuonPhiMinSel_ = fs->make<TH1F>("trailingMuonPhiMinSel" , "mu2_phi" ,   100,  -4.,   4.);
 	TH1F* mumuMassMinSel_= fs->make<TH1F>("mumuMassMinSel", "Dimuon_Mass",    100,  2.8,  10.2);
-    TH1F* Jpsi_Mass_= fs->make<TH1F>("Jpsi_Mass", "Jpsi_Mass",    100,  2.8,  3.2);
+	TH1F* Jpsi_Mass_= fs->make<TH1F>("Jpsi_Mass", "Jpsi_Mass",    100,  2.8,  3.2);
 
 	//genGammas
 	TH1F* gammaPt_  = fs->make<TH1F>("gammaPt"  , "pt"  ,   100,   0., 300.);
@@ -220,7 +220,7 @@ AcceptanceStudies::~AcceptanceStudies()
 //
 
 // ------------ method called for each event  ------------
-	void
+void
 AcceptanceStudies::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
 	using namespace edm;
@@ -264,16 +264,15 @@ bool AcceptanceStudies::PATGenFilter(edm::Handle <pat::PackedGenParticleCollecti
 	for (auto genMuon = genColl->cbegin(); genMuon != genColl->cend(); ++genMuon) {
 		const pat::PackedGenParticle& mcMuon = (*genMuon);
 		if ( not (abs(mcMuon.pdgId()) == 13 ) ) continue; // make sure it is a muon
-		if ( mcMuon.pt() > minMuPt_  && fabs(mcMuon.eta()) < maxMuEta_ ) continue;
-		if(verbose_) cout<< "mcMuon.pt() "  << mcMuon.pt() << endl;
-		myLeptons.push_back(*genMuon);
-
-
+		if ( mcMuon.pt() > minMuPt_  && fabs(mcMuon.eta()) <= maxMuEta_ && mcMuon.status() == 1 ) {;
+			if(verbose_) cout<< "mcMuon.pt() "  << mcMuon.pt() << endl;
+			myLeptons.push_back(*genMuon);
+		}
 	}
 
 	std::sort(myLeptons.begin(),myLeptons.end(), [](const pat::PackedGenParticle &a, const pat::PackedGenParticle &b){
-			return a.pt() > b.pt();
-			});
+		return a.pt() > b.pt();
+	});
 
 
 	if(verbose_) std::cout<<"PAT myLeptons.size() all  " << myLeptons.size() << std::endl;
@@ -302,7 +301,7 @@ bool AcceptanceStudies::PATGenFilter(edm::Handle <pat::PackedGenParticleCollecti
         //leadingMuonPt_->Fill(leadingMuon.pt());
         //leadingMuonEta_->Fill(leadingMuon.eta());
         //leadingMuonPhi_->Fill(leadingMuon.phi());
-        if(verbose_) std::cout<< "Dimuons Invariant Mass Mll: " << Mll << std::endl; 
+		if(verbose_) std::cout<< "Dimuons Invariant Mass Mll: " << Mll << std::endl; 
         //trailingMuonPt_->Fill(trailingMuon.pt());
         //trailingMuonEta_->Fill(trailingMuon.eta()); 
         //trailingMuonPhi_->Fill(trailingMuon.phi()); 
@@ -333,24 +332,27 @@ bool AcceptanceStudies::PATGenFilter(edm::Handle <pat::PackedGenParticleCollecti
 		} else {return false;}//lead and trail muon pT cut
 
 
-		// Photon Loop
 
-		for (auto genPhoton = genColl->cbegin(); genPhoton != genColl->cend(); ++genPhoton) {
-			const pat::PackedGenParticle& mcPhoton = (*genPhoton);
+	} else {return false;}//dimuons selection
+
+	// Photon Loop
+
+	for (auto genPhoton = genColl->cbegin(); genPhoton != genColl->cend(); ++genPhoton) {
+		const pat::PackedGenParticle& mcPhoton = (*genPhoton);
 			if ( not (mcPhoton.pdgId() == 22) ) continue; // make sure it is a photon
 			//if(verbose_) cout<<" mcPhoton.pdgId()" << mcPhoton.pdgId() << "mcPhoton.pt() "  << mcPhoton.pt() << " mcPhoton.isPromptFinalState() " <<  mcPhoton.status() << endl;
 			if(mcPhoton.pt() > GammaMinPtCut_ && mcPhoton.status() == 1 && fabs(mcPhoton.eta()) <= 2.5 ) {	
-			if(verbose_) cout<<" mcPhoton.pdgId() " << mcPhoton.pdgId() << " mcPhoton.pt() "  << mcPhoton.pt() << " mcPhoton.State() " <<  mcPhoton.status() << endl;
+				if(verbose_) cout<<" mcPhoton.pdgId() " << mcPhoton.pdgId() << " mcPhoton.pt() "  << mcPhoton.pt() << " mcPhoton.State() " <<  mcPhoton.status() << endl;
 
-			myPhotons.push_back(*genPhoton);
+				myPhotons.push_back(*genPhoton);
 			}
 		}//end loop photon
 
 
 
 		std::sort(myPhotons.begin(),myPhotons.end(), [](const pat::PackedGenParticle &a, const pat::PackedGenParticle &b){
-				return a.pt() > b.pt();
-				});
+			return a.pt() > b.pt();
+		});
 
 		if (  myPhotons.size() >= 1 ) {
 			nPhoton++;
@@ -366,10 +368,10 @@ bool AcceptanceStudies::PATGenFilter(edm::Handle <pat::PackedGenParticleCollecti
             gammaEta_->Fill(Gamma.eta());
             gammaPhi_->Fill(Gamma.phi());
 */
-            double Mllg = (leadingMuon.p4() + trailingMuon.p4() + Gamma.p4()).mass();
-            double MllgpT = (leadingMuon.p4() + trailingMuon.p4() + Gamma.p4()).pt();
-            double Mllgeta = (leadingMuon.p4() + trailingMuon.p4() + Gamma.p4()).eta();    
-            double Mllgphi = (leadingMuon.p4() + trailingMuon.p4() + Gamma.p4()).phi();
+			double Mllg = (leadingMuon.p4() + trailingMuon.p4() + Gamma.p4()).mass();
+			double MllgpT = (leadingMuon.p4() + trailingMuon.p4() + Gamma.p4()).pt();
+			double Mllgeta = (leadingMuon.p4() + trailingMuon.p4() + Gamma.p4()).eta();    
+			double Mllgphi = (leadingMuon.p4() + trailingMuon.p4() + Gamma.p4()).phi();
   //          mumugammaMass_->Fill(Mllg);
 
 			// if (drLeadMuPhoton > drLeadMuPhotonSel_ && drTrailPhoton > drTrailPhotonSel_){
@@ -386,28 +388,27 @@ bool AcceptanceStudies::PATGenFilter(edm::Handle <pat::PackedGenParticleCollecti
 				if(verbose_) std::cout<< "Invariant Mass Mllg, pT, eta, phi: " << Mllg << " " << MllgpT << " " << Mllgeta << " " << Mllgphi << std::endl;  
 			} else {return false;}// deltaR cuts 
 		} else {return false;}//photon selection
-	} else {return false;}//dimuons selection
 
-	return true;
-}
+		return true;
+	}
 
 // ------------ method called once each job just before starting event loop  ------------
 	void 
-AcceptanceStudies::beginJob()
-{
-}
+	AcceptanceStudies::beginJob()
+	{
+	}
 
 // ------------ method called once each job just after ending the event loop  ------------
 	void 
-AcceptanceStudies::endJob() 
-{
+	AcceptanceStudies::endJob() 
+	{
 
  // set evts counters
-  TnEvts->SetBinContent(1, nEvts);
-  TnEvtsGEN->SetBinContent(1, nEvtsGEN);
+		TnEvts->SetBinContent(1, nEvts);
+		TnEvtsGEN->SetBinContent(1, nEvtsGEN);
 
-}
+	}
 
 
 //define this as a plug-in
-DEFINE_FWK_MODULE(AcceptanceStudies);
+	DEFINE_FWK_MODULE(AcceptanceStudies);
