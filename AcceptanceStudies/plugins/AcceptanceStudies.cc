@@ -278,13 +278,14 @@ bool AcceptanceStudies::PATGenFilter(edm::Handle <pat::PackedGenParticleCollecti
 	if(verbose_) std::cout<<"PAT myLeptons.size() all  " << myLeptons.size() << std::endl;
 
 
-
+	pat::PackedGenParticle leadingMuon;
+	pat::PackedGenParticle trailingMuon;
 	if (myLeptons.size() >= 2) {
 		nDimuon++;
 		if(verbose_) std::cout<<"PAT  Muons Multiplicity:  " << myLeptons.size() << std::endl; 
 		// if(verbose_) std::cout<<"PAT Dimuons Multiplicity:  " << nDimuon << std::endl;
-		pat::PackedGenParticle leadingMuon = myLeptons[0];
-		pat::PackedGenParticle trailingMuon = myLeptons[1];
+		leadingMuon = myLeptons[0];
+		trailingMuon = myLeptons[1];
 		//Dimuons  selection
 		// if ((leadingMuon.charge() != trailingMuon.charge())) {
 		// } else {return false;}
