@@ -173,37 +173,37 @@ drTrailPhotonSel_ (iConfig.getParameter<double>("DeltaRTrailPhotonSel"))
 	//TFileDirectory fs->= fs->mkfs->"plots");
 
 	//genMuons
-	TH1F* leadingMuonPt_  = fs->make<TH1F>("leadingMuonPt"  , "mu1_pt"  ,   100,   0., 200.);
-	TH1F* leadingMuonEta_ = fs->make<TH1F>("leadingMuonEta" , "mu1_eta" ,   100,  -5.,   5.);
-	// TH2F* leadingMuonPtVsleadingMuonEta_ = fs->make<TH2F>("leadingMuonPtVsleadingMuonEta", "Pt Vs Ets",100,0.,100.,100,-5., 5.);
-	TH1F* leadingMuonPhi_ = fs->make<TH1F>("leadingMuonPhi" , "mu1_phi" ,   100,  -4.,   4.);
-	TH1F* trailingMuonPt_  = fs->make<TH1F>("trailingMuonPt"  , "mu2_pt"  ,   100,   0., 200.);
-	TH1F* trailingMuonEta_ = fs->make<TH1F>("trailingMuonEta" , "mu2_eta" ,   100,  -5.,   5.);
-	TH1F* trailingMuonPhi_ = fs->make<TH1F>("trailingMuonPhi" , "mu2_phi" ,   100,  -4.,   4.);
-	TH1F* mumuMass_= fs->make<TH1F>("mumuMass", "Dimuon_Mass",    100,  2.8,  10.2);
+	leadingMuonPt_  = fs->make<TH1F>("leadingMuonPt"  , "mu1_pt"  ,   100,   0., 200.);
+	leadingMuonEta_ = fs->make<TH1F>("leadingMuonEta" , "mu1_eta" ,   100,  -5.,   5.);
+	//leadingMuonPtVsleadingMuonEta_ = fs->make<TH2F>("leadingMuonPtVsleadingMuonEta", "Pt Vs Ets",100,0.,100.,100,-5., 5.);
+	leadingMuonPhi_ = fs->make<TH1F>("leadingMuonPhi" , "mu1_phi" ,   100,  -4.,   4.);
+	trailingMuonPt_  = fs->make<TH1F>("trailingMuonPt"  , "mu2_pt"  ,   100,   0., 200.);
+	trailingMuonEta_ = fs->make<TH1F>("trailingMuonEta" , "mu2_eta" ,   100,  -5.,   5.);
+	trailingMuonPhi_ = fs->make<TH1F>("trailingMuonPhi" , "mu2_phi" ,   100,  -4.,   4.);
+	mumuMass_= fs->make<TH1F>("mumuMass", "Dimuon_Mass",    100,  2.8,  10.2);
 
 	//MinSel
-	TH1F* leadingMuonPtMinSel_  = fs->make<TH1F>("leadingMuonPtMinSel"  , "mu1_pt"  ,   100,   0., 200.);
-	TH1F* leadingMuonEtaMinSel_ = fs->make<TH1F>("leadingMuonEtaMinSel" , "mu1_eta" ,   100,  -5.,   5.);
-	TH1F* leadingMuonPhiMinSel_ = fs->make<TH1F>("leadingMuonPhiMinSel" , "mu1_phi" ,   100,  -4.,   4.);
-	//TH2F* leadingMuonPtVsleadingMuonEtaMinSel_ = fs->make<TH2F>("leadingMuonPtVsleadingMuonEtaMinSel", "mu1_pt x mu1_eta" ,100,0.,100.,100,-5., 5.);
-	TH1F* trailingMuonPtMinSel_  = fs->make<TH1F>("trailingMuonPtMinSel"  , "mu2_pt"  ,   100,   0., 200.);
-	TH1F* trailingMuonEtaMinSel_ = fs->make<TH1F>("trailingMuonEtaMinSel" , "mu2_eta" ,   100,  -5.,   5.);
-	TH1F* trailingMuonPhiMinSel_ = fs->make<TH1F>("trailingMuonPhiMinSel" , "mu2_phi" ,   100,  -4.,   4.);
-	TH1F* mumuMassMinSel_= fs->make<TH1F>("mumuMassMinSel", "Dimuon_Mass",    100,  2.8,  10.2);
-	TH1F* Jpsi_Mass_= fs->make<TH1F>("Jpsi_Mass", "Jpsi_Mass",    100,  2.8,  3.2);
+	leadingMuonPtMinSel_  = fs->make<TH1F>("leadingMuonPtMinSel"  , "mu1_pt"  ,   100,   0., 200.);
+	leadingMuonEtaMinSel_ = fs->make<TH1F>("leadingMuonEtaMinSel" , "mu1_eta" ,   100,  -5.,   5.);
+	leadingMuonPhiMinSel_ = fs->make<TH1F>("leadingMuonPhiMinSel" , "mu1_phi" ,   100,  -4.,   4.);
+	//leadingMuonPtVsleadingMuonEtaMinSel_ = fs->make<TH2F>("leadingMuonPtVsleadingMuonEtaMinSel", "mu1_pt x mu1_eta" ,100,0.,100.,100,-5., 5.);
+	trailingMuonPtMinSel_  = fs->make<TH1F>("trailingMuonPtMinSel"  , "mu2_pt"  ,   100,   0., 200.);
+	trailingMuonEtaMinSel_ = fs->make<TH1F>("trailingMuonEtaMinSel" , "mu2_eta" ,   100,  -5.,   5.);
+	trailingMuonPhiMinSel_ = fs->make<TH1F>("trailingMuonPhiMinSel" , "mu2_phi" ,   100,  -4.,   4.);
+	mumuMassMinSel_= fs->make<TH1F>("mumuMassMinSel", "Dimuon_Mass",    100,  2.8,  10.2);
+	Jpsi_Mass_= fs->make<TH1F>("Jpsi_Mass", "Jpsi_Mass",    100,  2.8,  3.2);
 
 	//genGammas
-	TH1F* gammaPt_  = fs->make<TH1F>("gammaPt"  , "pt"  ,   100,   0., 300.);
-	TH1F* gammaEta_ = fs->make<TH1F>("gammaEta" , "eta" ,   100,  -5.,   5.);
-	TH1F* gammaPhi_ = fs->make<TH1F>("gammaPhi" , "phi" ,   100,  -4.,   4.);
-	TH1F* mumugammaMass_= fs->make<TH1F>("zMass", "mass",    100,  65.,  115.);
+	gammaPt_  = fs->make<TH1F>("gammaPt"  , "pt"  ,   100,   0., 300.);
+	gammaEta_ = fs->make<TH1F>("gammaEta" , "eta" ,   100,  -5.,   5.);
+	gammaPhi_ = fs->make<TH1F>("gammaPhi" , "phi" ,   100,  -4.,   4.);
+	mumugammaMass_= fs->make<TH1F>("zMass", "mass",    100,  65.,  115.);
 
 	//MinSel
-	TH1F* gammaPtMinSel_  = fs->make<TH1F>("gammaPtMinSel"  , "pt"  ,   100,   0., 300.);
-	TH1F* gammaEtaMinSel_ = fs->make<TH1F>("gammaEtaMinSel" , "eta" ,   100,  -5.,   5.);
-	TH1F* gammaPhiMinSel_ = fs->make<TH1F>("gammaPhiMinSel" , "phi" ,   100,  -4.,   4.);
-	TH1F* mumugammaMassMinSel_= fs->make<TH1F>("zMassMinSel", "mass",    100,  65.,  115.);
+	gammaPtMinSel_  = fs->make<TH1F>("gammaPtMinSel"  , "pt"  ,   100,   0., 300.);
+	gammaEtaMinSel_ = fs->make<TH1F>("gammaEtaMinSel" , "eta" ,   100,  -5.,   5.);
+	gammaPhiMinSel_ = fs->make<TH1F>("gammaPhiMinSel" , "phi" ,   100,  -4.,   4.);
+	mumugammaMassMinSel_= fs->make<TH1F>("zMassMinSel", "mass",    100,  65.,  115.);
 
 
 }
