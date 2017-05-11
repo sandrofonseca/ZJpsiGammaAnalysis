@@ -18,7 +18,8 @@ ROOT.gROOT.Reset()
 canv1 = ROOT.TCanvas("c1","c1",200,10,1050,750);
 canv1.cd()
 legend = ROOT.TLegend(0.90-.38,0.7,0.9,0.9);
-draw_opts = "histSAME e1"
+#draw_opts = "SAME "
+draw_opts = "SAMEP"
 i = 0
 hTotal = 'h_nEvts_ZJpsiGamma 2017 MC sample'
 hGEN = 'h_nEvtsGEN_ZJpsiGamma 2017 MC sample'
@@ -27,8 +28,8 @@ hGEN = 'h_nEvtsGEN_ZJpsiGamma 2017 MC sample'
 #hName = 'leadingMuonPtMinSel'
 #hName = 'trailingMuonPtMinSel'
 hName = 'hefficiency'
-#DName = ["acceptance_5_5_12", "acceptance_6_2_12","acceptance_8_8_12","acceptance_12_8_12","acceptance_20_12_12","acceptance_20_2_22","acceptance_20_4_22","acceptance_20_5_22"]
-DName = ["acceptance_5_5_12"]
+#DName = ["acceptance_5_5_12", "acceptance_6_2_12","acceptance_8_8_12","acceptance_12_8_12","acceptance_20_12_12"]#,"acceptance_20_2_22","acceptance_20_4_22","acceptance_20_5_22"]
+DName = ["acceptance_5_5_12","acceptance_6_2_12"]
 yname = "Eff"
 #xname = "pT [GeV/c]"
 xname = ""
@@ -43,7 +44,7 @@ dirs = {}
 td = None
 h_num_den = ROOT.TH1F('h_num_den' , 'h_num_den' ,  1, 0., 1.)
 h_num_tot = ROOT.TH1F('h_num_tot' , 'h_num_tot' ,  1, 0., 1.)
-
+h_empty = ROOT.TH1F('' , '' ,  1, 0., 1.)
 while key:
     if key.GetClassName() == 'TDirectoryFile':
         td = key.ReadObj()
@@ -62,25 +63,22 @@ while key:
 		    #print histogram	
                     if (htotal.GetName() == hTotal and hgen.GetName() == hGEN)  :
                        #print hist.GetName(), i
-                       print "Total Evts: ", histogramT, "Gen Evts:", histogramG
+                       print "Total Evts: ", htotal.GetName(), "Gen Evts:", hgen.GetName(), "i " , i
 	               h_num_tot = histogramT.Clone() 
 		       h_num_den = histogramG.Clone()	
 		       print "Total:" , h_num_tot.GetBinContent(1) 
 		       print "Gen: ", h_num_den.GetBinContent(1)       
-		       eff = ROOT.TEfficiency(h_num_tot, h_num_den)	
-                       eff.SetMarkerColor(i+1)
+		       #eff = ROOT.TEfficiency(h_num_tot, h_num_den)	
+                       eff = ROOT.TEfficiency(h_num_den, h_num_tot)
+	               eff.SetMarkerColor(i+1)
                        eff.SetLineColor(i+1)  
                        eff.SetMarkerStyle(i+1)
-                       #histogram.SetLineWidth(2)
                        eff.SetLineStyle(i+1)
-                       #eff.GetXaxis().SetTitle(xname)
-                       #eff.GetYaxis().SetTitle(yname)
-                       #histogram.Draw(draw_opts)
-                       #legend.AddEntry(histogram,dirName,"lp")  
-#                       if i != 1:    
-#                            draw_opts += "SAME"
-                     #  eff.Draw(draw_opts)
-                       legend.AddEntry(eff,dirName,"lp")
+		       legend.AddEntry(eff,dirName,"lp")
+                       if i == 1: 
+			   eff.Draw()
+                       else: 
+		           eff.Draw(draw_opts)
 		        	
                        			
     key = iter.Next()
